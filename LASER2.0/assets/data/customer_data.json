@@ -1,0 +1,80 @@
+{
+    "Methanex":{
+        "pending_imports":[""]
+    },
+    "Halliburton International GMBH-Suriname":{
+        "imports":{
+            "additional_fields": [
+                {"Name": "CommercialInvoiceNumber", "Title":"Commercial Invoice Number"}
+            ]
+        }
+    },
+    "Pricesmart":{
+        "imports":{
+            "main_fields": [
+                {"Name": "ContainerNumber", "Title":"Container Number"}
+            ],
+            "additional_fields":[
+                {"Name": "ContainerNumber", "Title":"Docuents Pending"},
+                {"Name": "ScreeningStatus", "Title": "Screening Status"},
+                {"Name": "DeliveryDate", "Title": "Delivery Date"},
+                {"Name": "LodgeToScreen", "Title": "Lodge To Screen"},
+                {"Name": "EntryPaid", "Title": "Entry Paid"},
+                {"Name": "ChequeRequested", "Title": "Cheque Requested"},
+                {"Name": "ChequeRec", "Title": "Cheque Received"},
+                {"Name": "FullDocumentationReceived", "Title": "Full Documentation Received"},
+                {"Name": "WorksheetSentForApproval", "Title": "Worksheet Sent For Approval"},
+                {"Name": "WorksheetApprovalReceived", "Title": "Worksheet Approval Received"},
+                {"Name": "LastEvent", "Title": "Last Event"}
+            ]
+        }
+        
+    },"Caribbean Gas Chemical Ltd":{
+        "imports":{
+            "main_fields": [
+                {"Name": "RampsStatus", "Title":"Shipment Status"},
+                {"Name": "ProcurementOfficer", "Title":"Procurement Officer"}
+            ],
+            "additional_fields":[
+                {"Name": "LastEvent", "Title": "Last Event"}
+            ]
+        }
+        
+    },"SCHLUMBERGER TRINIDAD":{
+        "imports":{
+            "main_fields": [
+                {"Name": "RampsStatus", "Title":"Shipment Status"},
+                {"Name": "ProcurementOfficer", "Title":"Procurement Officer"}
+            ],
+            "additional_fields":[
+                {"Name": "Shipper", "Title": "Shipper"},
+                {"Name": "ModesOfTransportation", "Title": "Modes Of Transportation"},
+                {"Name": "LastEvent", "Title": "Last Event"}
+            ]
+        },
+        "pending_exports":{
+            "main_fields": [
+                {"Name": "Vessel", "Title":"Vessel"},
+                {"Name": "Pieces", "Title":"Quantity"}
+            ]
+        },
+        "exported":{
+            "main_fields": [
+                {"Name": "Vessel", "Title":"Vessel"},
+                {"Name": "Pieces", "Title":"Quantity"}
+            ]
+        },
+        "invoices":{
+            "main_fields": [
+                {"Name": "invoice_descriptions", "Title":"PO Number"}
+            ]
+        },
+        "cleared_imports":{
+            "main_fields": [
+                {"Name": "ProcurementOfficer", "Title":"Procurement Officer"},
+                {"Name": "InvoiceAmount", "Title":"Total Value of Shipment"}
+            ]
+        }
+        
+    }
+}

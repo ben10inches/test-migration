@@ -1,0 +1,1718 @@
+<definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="urn:CSSoapService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:CSSoapService">
+<types>
+<s:schema targetNamespace="urn:CSSoapService" attributeFormDefault="qualified" elementFormDefault="qualified">
+<s:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+<s:simpleType name="api_session_error">
+<s:restriction base="s:string">
+<s:enumeration value="license_in_use"/>
+<s:enumeration value="over_credit_limit"/>
+<s:enumeration value="no_capacity_in_trip"/>
+<s:enumeration value="service_unreachable"/>
+<s:enumeration value="invalid_operation"/>
+<s:enumeration value="error_saving_to_database"/>
+<s:enumeration value="unknown_object"/>
+<s:enumeration value="xml_validation_error"/>
+<s:enumeration value="invalid_xml"/>
+<s:enumeration value="transaction_not_found"/>
+<s:enumeration value="access_denied"/>
+<s:enumeration value="too_many_open_sessions"/>
+<s:enumeration value="no_error"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="contact_info2">
+<s:sequence>
+<s:element name="id" type="s:int"/>
+<s:element name="name" type="s:string"/>
+<s:element name="email" type="s:string"/>
+<s:element name="web_site" type="s:string"/>
+<s:element name="wan_ip" type="s:string"/>
+<s:element name="lan_ip" type="s:string"/>
+<s:element name="port" type="s:short"/>
+<s:element name="connect_type" type="s:unsignedByte"/>
+<s:element name="net_version" type="s:unsignedByte"/>
+<s:element name="availability" type="s:int"/>
+<s:element name="version" type="s:int"/>
+<s:element name="loc_lic" type="s:short"/>
+<s:element name="rem_lic" type="s:short"/>
+<s:element name="services" type="s:int"/>
+<s:element name="lan_port" type="s:short"/>
+<s:element name="wms_lic" type="s:short"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="contact_info">
+<s:sequence>
+<s:element name="id" type="s:int"/>
+<s:element name="name" type="s:string"/>
+<s:element name="email" type="s:string"/>
+<s:element name="web_site" type="s:string"/>
+<s:element name="wan_ip" type="s:string"/>
+<s:element name="lan_ip" type="s:string"/>
+<s:element name="port" type="s:short"/>
+<s:element name="connect_type" type="s:unsignedByte"/>
+<s:element name="net_version" type="s:unsignedByte"/>
+<s:element name="availability" type="s:int"/>
+<s:element name="version" type="s:int"/>
+<s:element name="loc_lic" type="s:short"/>
+<s:element name="rem_lic" type="s:short"/>
+<s:element name="services" type="s:int"/>
+</s:sequence>
+</s:complexType>
+</s:schema>
+</types>
+<message name="TestConnectionIn">
+<part name="in_cookie" type="s:int"/>
+<part name="id" type="s:int"/>
+</message>
+<message name="TestConnectionOut">
+<part name="out_cookie" type="s:int"/>
+</message>
+<message name="StartTrackingIn">
+<part name="login" type="s:string"/>
+<part name="password" type="s:string"/>
+</message>
+<message name="StartTrackingOut">
+<part name="return" type="s:int"/>
+<part name="services" type="s:int"/>
+<part name="company_info" type="s:string"/>
+<part name="cookie" type="s:int"/>
+</message>
+<message name="GetTrackingTransactionIn">
+<part name="app" type="s:string"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="GetTrackingTransactionOut">
+<part name="trans_xml" type="s:string"/>
+</message>
+<message name="GetAttachmentIn">
+<part name="app" type="s:string"/>
+<part name="trans_uuid" type="s:string"/>
+<part name="attach_id" type="s:int"/>
+</message>
+<message name="GetAttachmentOut">
+<part name="attach_xml" type="s:string"/>
+</message>
+<message name="GetDocumentIn">
+<part name="trans_uuid" type="s:string"/>
+<part name="doc_id" type="s:int"/>
+</message>
+<message name="GetDocumentOut">
+<part name="attach_xml" type="s:string"/>
+</message>
+<message name="InvitationFromPeerIn">
+<part name="id" type="s:int"/>
+<part name="uuid" type="s:string"/>
+<part name="employee" type="s:string"/>
+<part name="body" type="s:string"/>
+<part name="company" type="s:string"/>
+<part name="country" type="s:string"/>
+<part name="city" type="s:string"/>
+</message>
+<message name="InvitationFromPeerOut">
+<part name="return" type="s:int"/>
+</message>
+<message name="AnswerInvitationIn">
+<part name="bAccepted" type="s:int"/>
+<part name="uuid" type="s:string"/>
+<part name="employee" type="s:string"/>
+<part name="body" type="s:string"/>
+<part name="company" type="s:string"/>
+<part name="country" type="s:string"/>
+<part name="city" type="s:string"/>
+<part name="pInfo" type="s0:contact_info"/>
+</message>
+<message name="AnswerInvitationOut">
+<part name="return" type="s:int"/>
+<part name="pInfo" type="s0:contact_info"/>
+</message>
+<message name="AnswerInvitation2In">
+<part name="bAccepted" type="s:int"/>
+<part name="uuid" type="s:string"/>
+<part name="employee" type="s:string"/>
+<part name="body" type="s:string"/>
+<part name="company" type="s:string"/>
+<part name="country" type="s:string"/>
+<part name="city" type="s:string"/>
+<part name="pInfo" type="s0:contact_info2"/>
+</message>
+<message name="AnswerInvitation2Out">
+<part name="return" type="s:int"/>
+<part name="pInfo" type="s0:contact_info2"/>
+</message>
+<message name="StartSessionIn">
+<part name="user" type="s:string"/>
+<part name="pass" type="s:string"/>
+</message>
+<message name="StartSessionOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="access_key" type="s:int"/>
+</message>
+<message name="EndSessionIn">
+<part name="access_key" type="s:int"/>
+</message>
+<message name="EndSessionOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="GetTransactionIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="GetTransactionOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_xml" type="s:string"/>
+</message>
+<message name="SetTransactionIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="trans_xml" type="s:string"/>
+</message>
+<message name="SetTransactionOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="error_desc" type="s:string"/>
+</message>
+<message name="GetTransRangeByDateIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="start_date" type="s:string"/>
+<part name="end_date" type="s:string"/>
+<part name="flags" type="s:int"/>
+</message>
+<message name="GetTransRangeByDateOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_list_xml" type="s:string"/>
+</message>
+<message name="DeleteTransactionIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="DeleteTransactionOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="RenameTransactionIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+<part name="new_name" type="s:string"/>
+</message>
+<message name="RenameTransactionOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="GetWorkingPortsIn"> </message>
+<message name="GetWorkingPortsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="ports_list_xml" type="s:string"/>
+</message>
+<message name="GetTripScheduleIn">
+<part name="arr_start_date" type="s:string"/>
+<part name="arr_end_date" type="s:string"/>
+<part name="dep_start_date" type="s:string"/>
+<part name="dep_end_date" type="s:string"/>
+<part name="org_port" type="s:string"/>
+<part name="dest_port" type="s:string"/>
+</message>
+<message name="GetTripScheduleOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trip_list_xml" type="s:string"/>
+</message>
+<message name="BookingRequestIn">
+<part name="booking_xml" type="s:string"/>
+<part name="trip_uuid" type="s:string"/>
+</message>
+<message name="BookingRequestOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="booking_number" type="s:string"/>
+<part name="result_string" type="s:string"/>
+</message>
+<message name="StartTracking2In">
+<part name="login" type="s:string"/>
+<part name="password" type="s:string"/>
+</message>
+<message name="StartTracking2Out">
+<part name="return" type="s:int"/>
+<part name="services" type="s:int"/>
+<part name="company_info" type="s:string"/>
+<part name="user_info" type="s:string"/>
+<part name="cookie" type="s:int"/>
+</message>
+<message name="GetPackageTypesIn"> </message>
+<message name="GetPackageTypesOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="pack_list_xml" type="s:string"/>
+</message>
+<message name="CancelBookingIn">
+<part name="booking_uuid" type="s:string"/>
+</message>
+<message name="CancelBookingOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="GetCustomFieldDefinitionsIn">
+<part name="type" type="s:string"/>
+</message>
+<message name="GetCustomFieldDefinitionsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="field_list_xml" type="s:string"/>
+</message>
+<message name="GetItemFromVINIn">
+<part name="access_key" type="s:int"/>
+<part name="vin" type="s:string"/>
+</message>
+<message name="GetItemFromVINOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="item_xml" type="s:string"/>
+</message>
+<message name="SetShipmentStatusIn">
+<part name="access_key" type="s:int"/>
+<part name="status" type="s:string"/>
+<part name="shipment_uuid" type="s:string"/>
+</message>
+<message name="SetShipmentStatusOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="GetMagayaDocumentIn">
+<part name="filename" type="s:string"/>
+</message>
+<message name="GetMagayaDocumentOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="attach_xml" type="s:string"/>
+<part name="error" type="s:string"/>
+</message>
+<message name="GetAccountingTransactionsIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="GetAccountingTransactionsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_xml" type="s:string"/>
+</message>
+<message name="GetRelatedTransactionsIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="GetRelatedTransactionsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_xml" type="s:string"/>
+</message>
+<message name="GetAccountDefinitionsIn">
+<part name="access_key" type="s:int"/>
+</message>
+<message name="GetAccountDefinitionsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="account_list_xml" type="s:string"/>
+</message>
+<message name="GetChargeDefinitionsIn">
+<part name="access_key" type="s:int"/>
+</message>
+<message name="GetChargeDefinitionsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="service_list_xml" type="s:string"/>
+</message>
+<message name="GetActiveCurrenciesIn">
+<part name="access_key" type="s:int"/>
+</message>
+<message name="GetActiveCurrenciesOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="currency_list_xml" type="s:string"/>
+</message>
+<message name="QueryLogIn">
+<part name="access_key" type="s:int"/>
+<part name="start_date" type="s:string"/>
+<part name="end_date" type="s:string"/>
+<part name="log_entry_type" type="s:int"/>
+<part name="trans_type" type="s:string"/>
+<part name="flags" type="s:int"/>
+</message>
+<message name="QueryLogOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_list_xml" type="s:string"/>
+</message>
+<message name="GetPODDataIn">
+<part name="app" type="s:string"/>
+<part name="trans_uuid" type="s:string"/>
+</message>
+<message name="GetPODDataOut">
+<part name="pod_xml" type="s:string"/>
+</message>
+<message name="GetClientRatesIn">
+<part name="access_key" type="s:int"/>
+<part name="client_uuid" type="s:string"/>
+<part name="org_port" type="s:string"/>
+<part name="dest_port" type="s:string"/>
+<part name="method" type="s:string"/>
+<part name="include_standard" type="s:int"/>
+</message>
+<message name="GetClientRatesOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="rate_list_xml" type="s:string"/>
+</message>
+<message name="GetStandardRatesIn">
+<part name="access_key" type="s:int"/>
+<part name="org_port" type="s:string"/>
+<part name="dest_port" type="s:string"/>
+<part name="method" type="s:string"/>
+</message>
+<message name="GetStandardRatesOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="rate_list_xml" type="s:string"/>
+</message>
+<message name="GetClientChargeDefinitionsIn">
+<part name="access_key" type="s:int"/>
+<part name="client_uuid" type="s:string"/>
+</message>
+<message name="GetClientChargeDefinitionsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="charge_list_xml" type="s:string"/>
+</message>
+<message name="SetRateIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="rate_xml" type="s:string"/>
+</message>
+<message name="SetRateOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="error_desc" type="s:string"/>
+</message>
+<message name="SetEntityIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="entity_xml" type="s:string"/>
+</message>
+<message name="SetEntityOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="error_desc" type="s:string"/>
+</message>
+<message name="GetEntitiesIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="start_with" type="s:string"/>
+</message>
+<message name="GetEntitiesOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="entity_list_xml" type="s:string"/>
+</message>
+<message name="GetEntityContactsIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="entity_uuid" type="s:string"/>
+</message>
+<message name="GetEntityContactsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="contact_list_xml" type="s:string"/>
+</message>
+<message name="SubmitSalesOrderIn">
+<part name="access_key" type="s:int"/>
+<part name="sales_order_xml" type="s:string"/>
+<part name="flags" type="s:int"/>
+</message>
+<message name="SubmitSalesOrderOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="sales_order_number" type="s:string"/>
+<part name="result_string" type="s:string"/>
+</message>
+<message name="SubmitCargoReleaseIn">
+<part name="access_key" type="s:int"/>
+<part name="cargo_release_xml" type="s:string"/>
+<part name="flags" type="s:int"/>
+</message>
+<message name="SubmitCargoReleaseOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="cargo_release_number" type="s:string"/>
+<part name="result_string" type="s:string"/>
+</message>
+<message name="SubmitShipmentIn">
+<part name="access_key" type="s:int"/>
+<part name="shipment_xml" type="s:string"/>
+<part name="flags" type="s:int"/>
+</message>
+<message name="SubmitShipmentOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="shipment_number" type="s:string"/>
+<part name="result_string" type="s:string"/>
+</message>
+<message name="GetEventDefinitionsIn">
+<part name="access_key" type="s:int"/>
+</message>
+<message name="GetEventDefinitionsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="event_definition_list_xml" type="s:string"/>
+</message>
+<message name="SetTransactionEventsIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+<part name="event_list_xml" type="s:string"/>
+</message>
+<message name="SetTransactionEventsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="error_desc" type="s:string"/>
+</message>
+<message name="UpdateOrderIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="order_xml" type="s:string"/>
+</message>
+<message name="UpdateOrderOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="error_desc" type="s:string"/>
+</message>
+<message name="SetCustomFieldValueIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+<part name="field_internal_name" type="s:string"/>
+<part name="field_value" type="s:string"/>
+</message>
+<message name="SetCustomFieldValueOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="SetApprovalStatusIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+<part name="status" type="s:int"/>
+</message>
+<message name="SetApprovalStatusOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="GetCarrierRatesIn">
+<part name="access_key" type="s:int"/>
+<part name="carrier_uuid" type="s:string"/>
+<part name="org_port" type="s:string"/>
+<part name="dest_port" type="s:string"/>
+<part name="method" type="s:string"/>
+</message>
+<message name="GetCarrierRatesOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="rate_list_xml" type="s:string"/>
+</message>
+<message name="GetEntityTransactionsIn">
+<part name="access_key" type="s:int"/>
+<part name="entity_uuid" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="start_date" type="s:string"/>
+<part name="end_date" type="s:string"/>
+</message>
+<message name="GetEntityTransactionsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="acctrans_list_xml" type="s:string"/>
+</message>
+<message name="QueryLogJSIn">
+<part name="access_key" type="s:int"/>
+<part name="start_date" type="s:string"/>
+<part name="end_date" type="s:string"/>
+<part name="log_entry_type" type="s:int"/>
+<part name="trans_type" type="s:string"/>
+<part name="function" type="s:string"/>
+<part name="xml_params" type="s:string"/>
+<part name="log_flags" type="s:int"/>
+<part name="xml_flags" type="s:int"/>
+</message>
+<message name="QueryLogJSOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_list_xml" type="s:string"/>
+</message>
+<message name="ExistsTransactionIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="ExistsTransactionOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="exist_trans" type="s:int"/>
+</message>
+<message name="GetTransactionStatusIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="GetTransactionStatusOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_status" type="s:string"/>
+</message>
+<message name="SetTrackingUserIn">
+<part name="access_key" type="s:int"/>
+<part name="contact_uuid" type="s:string"/>
+<part name="login" type="s:string"/>
+<part name="password" type="s:string"/>
+<part name="user_config_xml" type="s:string"/>
+<part name="xml_flags" type="s:int"/>
+</message>
+<message name="SetTrackingUserOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="GetItemDefinitionsByCustomerIn">
+<part name="access_key" type="s:int"/>
+<part name="customer_uuid" type="s:string"/>
+<part name="flags" type="s:int"/>
+</message>
+<message name="GetItemDefinitionsByCustomerOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="def_list_xml" type="s:string"/>
+</message>
+<message name="GetInventoryItemsByItemDefinitionIn">
+<part name="access_key" type="s:int"/>
+<part name="uuid" type="s:string"/>
+<part name="flags" type="s:int"/>
+</message>
+<message name="GetInventoryItemsByItemDefinitionOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="item_list_xml" type="s:string"/>
+</message>
+<message name="GetTransactionsByBillingClientIn">
+<part name="access_key" type="s:int"/>
+<part name="customer_uuid" type="s:string"/>
+<part name="type" type="s:string"/>
+<part name="start_date" type="s:string"/>
+<part name="end_date" type="s:string"/>
+<part name="flags" type="s:int"/>
+</message>
+<message name="GetTransactionsByBillingClientOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_list_xml" type="s:string"/>
+</message>
+<message name="GetEntitiesOfTypeIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="start_with" type="s:string"/>
+<part name="entity_type" type="s:int"/>
+</message>
+<message name="GetEntitiesOfTypeOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="entity_list_xml" type="s:string"/>
+</message>
+<message name="GetWebDocumentIn">
+<part name="trans_uuid" type="s:string"/>
+<part name="doc_id" type="s:int"/>
+</message>
+<message name="GetWebDocumentOut">
+<part name="document" type="s:string"/>
+<part name="document_length" type="s:int"/>
+<part name="is_ole_doc" type="s:int"/>
+</message>
+<message name="GetFirstTransbyDateIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="start_date" type="s:string"/>
+<part name="end_date" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="record_quantity" type="s:int"/>
+<part name="backwards_order" type="s:int"/>
+</message>
+<message name="GetFirstTransbyDateOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="cookie" type="s:string"/>
+<part name="more_results" type="s:int"/>
+</message>
+<message name="GetFirstTransbyDateJSIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="start_date" type="s:string"/>
+<part name="end_date" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="record_quantity" type="s:int"/>
+<part name="backwards_order" type="s:int"/>
+<part name="function" type="s:string"/>
+<part name="xml_params" type="s:string"/>
+</message>
+<message name="GetFirstTransbyDateJSOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="cookie" type="s:string"/>
+<part name="more_results" type="s:int"/>
+</message>
+<message name="GetNextTransbyDateIn">
+<part name="cookie" type="s:string"/>
+</message>
+<message name="GetNextTransbyDateOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="cookie" type="s:string"/>
+<part name="trans_list_xml" type="s:string"/>
+<part name="more_results" type="s:int"/>
+</message>
+<message name="GetTransRangeByDateJSIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="start_date" type="s:string"/>
+<part name="end_date" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="function" type="s:string"/>
+<part name="xml_params" type="s:string"/>
+</message>
+<message name="GetTransRangeByDateJSOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_list_xml" type="s:string"/>
+</message>
+<message name="GetSecureTrackingTransactionIn">
+<part name="user" type="s:string"/>
+<part name="pass" type="s:string"/>
+<part name="app" type="s:string"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="GetSecureTrackingTransactionOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="trans_xml" type="s:string"/>
+</message>
+<message name="InvokeIn">
+<part name="access_key" type="s:int"/>
+<part name="operation" type="s:string"/>
+<part name="flags" type="s:int"/>
+<part name="input" type="s:string"/>
+</message>
+<message name="InvokeOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="output" type="s:string"/>
+</message>
+<message name="ValidateSalesOrderIn">
+<part name="access_key" type="s:int"/>
+<part name="sales_order_xml" type="s:string"/>
+</message>
+<message name="ValidateSalesOrderOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="result_xml" type="s:string"/>
+<part name="result_string" type="s:string"/>
+</message>
+<message name="CancelSalesOrderIn">
+<part name="access_key" type="s:int"/>
+<part name="sales_order_number" type="s:string"/>
+</message>
+<message name="CancelSalesOrderOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="result_string" type="s:string"/>
+</message>
+<message name="SetTransactionChargesIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+<part name="charge_list_xml" type="s:string"/>
+</message>
+<message name="SetTransactionChargesOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="error_desc" type="s:string"/>
+</message>
+<message name="UpdatePODIn">
+<part name="access_key" type="s:int"/>
+<part name="trans_type" type="s:string"/>
+<part name="trans_uuid" type="s:string"/>
+<part name="pod_xml" type="s:string"/>
+<part name="delivered_items_xml" type="s:string"/>
+<part name="undelivered_items_xml" type="s:string"/>
+<part name="internal_comments" type="s:string"/>
+</message>
+<message name="UpdatePODOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="error_desc" type="s:string"/>
+</message>
+<message name="ApproveOrderIn">
+<part name="access_key" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+<part name="approved_by" type="s:string"/>
+</message>
+<message name="ApproveOrderOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<message name="SubmitPickupOrderIn">
+<part name="access_key" type="s:int"/>
+<part name="pickup_order_xml" type="s:string"/>
+</message>
+<message name="SubmitPickupOrderOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="pickup_order_number" type="s:string"/>
+<part name="result_string" type="s:string"/>
+</message>
+<message name="SetAttachmentIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+<part name="attach_xml" type="s:string"/>
+</message>
+<message name="SetAttachmentOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="error_desc" type="s:string"/>
+</message>
+<message name="GetAllAttachmentsIn">
+<part name="access_key" type="s:int"/>
+<part name="flags" type="s:int"/>
+<part name="type" type="s:string"/>
+<part name="number" type="s:string"/>
+</message>
+<message name="GetAllAttachmentsOut">
+<part name="return" type="s0:api_session_error"/>
+<part name="attach_list_xml" type="s:string"/>
+</message>
+<message name="SetParentEntityIn">
+<part name="access_key" type="s:int"/>
+<part name="entity_guid" type="s:string"/>
+<part name="parent_guid" type="s:string"/>
+</message>
+<message name="SetParentEntityOut">
+<part name="return" type="s0:api_session_error"/>
+</message>
+<portType name="CSSoapServiceSoap">
+<operation name="TestConnection">
+<input message="s0:TestConnectionIn"/>
+<output message="s0:TestConnectionOut"/>
+</operation>
+<operation name="StartTracking">
+<input message="s0:StartTrackingIn"/>
+<output message="s0:StartTrackingOut"/>
+</operation>
+<operation name="GetTrackingTransaction">
+<input message="s0:GetTrackingTransactionIn"/>
+<output message="s0:GetTrackingTransactionOut"/>
+</operation>
+<operation name="GetAttachment">
+<input message="s0:GetAttachmentIn"/>
+<output message="s0:GetAttachmentOut"/>
+</operation>
+<operation name="GetDocument">
+<input message="s0:GetDocumentIn"/>
+<output message="s0:GetDocumentOut"/>
+</operation>
+<operation name="InvitationFromPeer">
+<input message="s0:InvitationFromPeerIn"/>
+<output message="s0:InvitationFromPeerOut"/>
+</operation>
+<operation name="AnswerInvitation">
+<input message="s0:AnswerInvitationIn"/>
+<output message="s0:AnswerInvitationOut"/>
+</operation>
+<operation name="AnswerInvitation2">
+<input message="s0:AnswerInvitation2In"/>
+<output message="s0:AnswerInvitation2Out"/>
+</operation>
+<operation name="StartSession">
+<input message="s0:StartSessionIn"/>
+<output message="s0:StartSessionOut"/>
+</operation>
+<operation name="EndSession">
+<input message="s0:EndSessionIn"/>
+<output message="s0:EndSessionOut"/>
+</operation>
+<operation name="GetTransaction">
+<input message="s0:GetTransactionIn"/>
+<output message="s0:GetTransactionOut"/>
+</operation>
+<operation name="SetTransaction">
+<input message="s0:SetTransactionIn"/>
+<output message="s0:SetTransactionOut"/>
+</operation>
+<operation name="GetTransRangeByDate">
+<input message="s0:GetTransRangeByDateIn"/>
+<output message="s0:GetTransRangeByDateOut"/>
+</operation>
+<operation name="DeleteTransaction">
+<input message="s0:DeleteTransactionIn"/>
+<output message="s0:DeleteTransactionOut"/>
+</operation>
+<operation name="RenameTransaction">
+<input message="s0:RenameTransactionIn"/>
+<output message="s0:RenameTransactionOut"/>
+</operation>
+<operation name="GetWorkingPorts">
+<input message="s0:GetWorkingPortsIn"/>
+<output message="s0:GetWorkingPortsOut"/>
+</operation>
+<operation name="GetTripSchedule">
+<input message="s0:GetTripScheduleIn"/>
+<output message="s0:GetTripScheduleOut"/>
+</operation>
+<operation name="BookingRequest">
+<input message="s0:BookingRequestIn"/>
+<output message="s0:BookingRequestOut"/>
+</operation>
+<operation name="StartTracking2">
+<input message="s0:StartTracking2In"/>
+<output message="s0:StartTracking2Out"/>
+</operation>
+<operation name="GetPackageTypes">
+<input message="s0:GetPackageTypesIn"/>
+<output message="s0:GetPackageTypesOut"/>
+</operation>
+<operation name="CancelBooking">
+<input message="s0:CancelBookingIn"/>
+<output message="s0:CancelBookingOut"/>
+</operation>
+<operation name="GetCustomFieldDefinitions">
+<input message="s0:GetCustomFieldDefinitionsIn"/>
+<output message="s0:GetCustomFieldDefinitionsOut"/>
+</operation>
+<operation name="GetItemFromVIN">
+<input message="s0:GetItemFromVINIn"/>
+<output message="s0:GetItemFromVINOut"/>
+</operation>
+<operation name="SetShipmentStatus">
+<input message="s0:SetShipmentStatusIn"/>
+<output message="s0:SetShipmentStatusOut"/>
+</operation>
+<operation name="GetMagayaDocument">
+<input message="s0:GetMagayaDocumentIn"/>
+<output message="s0:GetMagayaDocumentOut"/>
+</operation>
+<operation name="GetAccountingTransactions">
+<input message="s0:GetAccountingTransactionsIn"/>
+<output message="s0:GetAccountingTransactionsOut"/>
+</operation>
+<operation name="GetRelatedTransactions">
+<input message="s0:GetRelatedTransactionsIn"/>
+<output message="s0:GetRelatedTransactionsOut"/>
+</operation>
+<operation name="GetAccountDefinitions">
+<input message="s0:GetAccountDefinitionsIn"/>
+<output message="s0:GetAccountDefinitionsOut"/>
+</operation>
+<operation name="GetChargeDefinitions">
+<input message="s0:GetChargeDefinitionsIn"/>
+<output message="s0:GetChargeDefinitionsOut"/>
+</operation>
+<operation name="GetActiveCurrencies">
+<input message="s0:GetActiveCurrenciesIn"/>
+<output message="s0:GetActiveCurrenciesOut"/>
+</operation>
+<operation name="QueryLog">
+<input message="s0:QueryLogIn"/>
+<output message="s0:QueryLogOut"/>
+</operation>
+<operation name="GetPODData">
+<input message="s0:GetPODDataIn"/>
+<output message="s0:GetPODDataOut"/>
+</operation>
+<operation name="GetClientRates">
+<input message="s0:GetClientRatesIn"/>
+<output message="s0:GetClientRatesOut"/>
+</operation>
+<operation name="GetStandardRates">
+<input message="s0:GetStandardRatesIn"/>
+<output message="s0:GetStandardRatesOut"/>
+</operation>
+<operation name="GetClientChargeDefinitions">
+<input message="s0:GetClientChargeDefinitionsIn"/>
+<output message="s0:GetClientChargeDefinitionsOut"/>
+</operation>
+<operation name="SetRate">
+<input message="s0:SetRateIn"/>
+<output message="s0:SetRateOut"/>
+</operation>
+<operation name="SetEntity">
+<input message="s0:SetEntityIn"/>
+<output message="s0:SetEntityOut"/>
+</operation>
+<operation name="GetEntities">
+<input message="s0:GetEntitiesIn"/>
+<output message="s0:GetEntitiesOut"/>
+</operation>
+<operation name="GetEntityContacts">
+<input message="s0:GetEntityContactsIn"/>
+<output message="s0:GetEntityContactsOut"/>
+</operation>
+<operation name="SubmitSalesOrder">
+<input message="s0:SubmitSalesOrderIn"/>
+<output message="s0:SubmitSalesOrderOut"/>
+</operation>
+<operation name="SubmitCargoRelease">
+<input message="s0:SubmitCargoReleaseIn"/>
+<output message="s0:SubmitCargoReleaseOut"/>
+</operation>
+<operation name="SubmitShipment">
+<input message="s0:SubmitShipmentIn"/>
+<output message="s0:SubmitShipmentOut"/>
+</operation>
+<operation name="GetEventDefinitions">
+<input message="s0:GetEventDefinitionsIn"/>
+<output message="s0:GetEventDefinitionsOut"/>
+</operation>
+<operation name="SetTransactionEvents">
+<input message="s0:SetTransactionEventsIn"/>
+<output message="s0:SetTransactionEventsOut"/>
+</operation>
+<operation name="UpdateOrder">
+<input message="s0:UpdateOrderIn"/>
+<output message="s0:UpdateOrderOut"/>
+</operation>
+<operation name="SetCustomFieldValue">
+<input message="s0:SetCustomFieldValueIn"/>
+<output message="s0:SetCustomFieldValueOut"/>
+</operation>
+<operation name="SetApprovalStatus">
+<input message="s0:SetApprovalStatusIn"/>
+<output message="s0:SetApprovalStatusOut"/>
+</operation>
+<operation name="GetCarrierRates">
+<input message="s0:GetCarrierRatesIn"/>
+<output message="s0:GetCarrierRatesOut"/>
+</operation>
+<operation name="GetEntityTransactions">
+<input message="s0:GetEntityTransactionsIn"/>
+<output message="s0:GetEntityTransactionsOut"/>
+</operation>
+<operation name="QueryLogJS">
+<input message="s0:QueryLogJSIn"/>
+<output message="s0:QueryLogJSOut"/>
+</operation>
+<operation name="ExistsTransaction">
+<input message="s0:ExistsTransactionIn"/>
+<output message="s0:ExistsTransactionOut"/>
+</operation>
+<operation name="GetTransactionStatus">
+<input message="s0:GetTransactionStatusIn"/>
+<output message="s0:GetTransactionStatusOut"/>
+</operation>
+<operation name="SetTrackingUser">
+<input message="s0:SetTrackingUserIn"/>
+<output message="s0:SetTrackingUserOut"/>
+</operation>
+<operation name="GetItemDefinitionsByCustomer">
+<input message="s0:GetItemDefinitionsByCustomerIn"/>
+<output message="s0:GetItemDefinitionsByCustomerOut"/>
+</operation>
+<operation name="GetInventoryItemsByItemDefinition">
+<input message="s0:GetInventoryItemsByItemDefinitionIn"/>
+<output message="s0:GetInventoryItemsByItemDefinitionOut"/>
+</operation>
+<operation name="GetTransactionsByBillingClient">
+<input message="s0:GetTransactionsByBillingClientIn"/>
+<output message="s0:GetTransactionsByBillingClientOut"/>
+</operation>
+<operation name="GetEntitiesOfType">
+<input message="s0:GetEntitiesOfTypeIn"/>
+<output message="s0:GetEntitiesOfTypeOut"/>
+</operation>
+<operation name="GetWebDocument">
+<input message="s0:GetWebDocumentIn"/>
+<output message="s0:GetWebDocumentOut"/>
+</operation>
+<operation name="GetFirstTransbyDate">
+<input message="s0:GetFirstTransbyDateIn"/>
+<output message="s0:GetFirstTransbyDateOut"/>
+</operation>
+<operation name="GetFirstTransbyDateJS">
+<input message="s0:GetFirstTransbyDateJSIn"/>
+<output message="s0:GetFirstTransbyDateJSOut"/>
+</operation>
+<operation name="GetNextTransbyDate">
+<input message="s0:GetNextTransbyDateIn"/>
+<output message="s0:GetNextTransbyDateOut"/>
+</operation>
+<operation name="GetTransRangeByDateJS">
+<input message="s0:GetTransRangeByDateJSIn"/>
+<output message="s0:GetTransRangeByDateJSOut"/>
+</operation>
+<operation name="GetSecureTrackingTransaction">
+<input message="s0:GetSecureTrackingTransactionIn"/>
+<output message="s0:GetSecureTrackingTransactionOut"/>
+</operation>
+<operation name="Invoke">
+<input message="s0:InvokeIn"/>
+<output message="s0:InvokeOut"/>
+</operation>
+<operation name="ValidateSalesOrder">
+<input message="s0:ValidateSalesOrderIn"/>
+<output message="s0:ValidateSalesOrderOut"/>
+</operation>
+<operation name="CancelSalesOrder">
+<input message="s0:CancelSalesOrderIn"/>
+<output message="s0:CancelSalesOrderOut"/>
+</operation>
+<operation name="SetTransactionCharges">
+<input message="s0:SetTransactionChargesIn"/>
+<output message="s0:SetTransactionChargesOut"/>
+</operation>
+<operation name="UpdatePOD">
+<input message="s0:UpdatePODIn"/>
+<output message="s0:UpdatePODOut"/>
+</operation>
+<operation name="ApproveOrder">
+<input message="s0:ApproveOrderIn"/>
+<output message="s0:ApproveOrderOut"/>
+</operation>
+<operation name="SubmitPickupOrder">
+<input message="s0:SubmitPickupOrderIn"/>
+<output message="s0:SubmitPickupOrderOut"/>
+</operation>
+<operation name="SetAttachment">
+<input message="s0:SetAttachmentIn"/>
+<output message="s0:SetAttachmentOut"/>
+</operation>
+<operation name="GetAllAttachments">
+<input message="s0:GetAllAttachmentsIn"/>
+<output message="s0:GetAllAttachmentsOut"/>
+</operation>
+<operation name="SetParentEntity">
+<input message="s0:SetParentEntityIn"/>
+<output message="s0:SetParentEntityOut"/>
+</operation>
+</portType>
+<binding name="CSSoapServiceSoap" type="s0:CSSoapServiceSoap">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"/>
+<operation name="TestConnection">
+<soap:operation soapAction="#TestConnection" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="StartTracking">
+<soap:operation soapAction="#StartTracking" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetTrackingTransaction">
+<soap:operation soapAction="#GetTrackingTransaction" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetAttachment">
+<soap:operation soapAction="#GetAttachment" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetDocument">
+<soap:operation soapAction="#GetDocument" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="InvitationFromPeer">
+<soap:operation soapAction="#InvitationFromPeer" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="AnswerInvitation">
+<soap:operation soapAction="#AnswerInvitation" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="AnswerInvitation2">
+<soap:operation soapAction="#AnswerInvitation2" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="StartSession">
+<soap:operation soapAction="#StartSession" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="EndSession">
+<soap:operation soapAction="#EndSession" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetTransaction">
+<soap:operation soapAction="#GetTransaction" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetTransaction">
+<soap:operation soapAction="#SetTransaction" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetTransRangeByDate">
+<soap:operation soapAction="#GetTransRangeByDate" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="DeleteTransaction">
+<soap:operation soapAction="#DeleteTransaction" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="RenameTransaction">
+<soap:operation soapAction="#RenameTransaction" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetWorkingPorts">
+<soap:operation soapAction="#GetWorkingPorts" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetTripSchedule">
+<soap:operation soapAction="#GetTripSchedule" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="BookingRequest">
+<soap:operation soapAction="#BookingRequest" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="StartTracking2">
+<soap:operation soapAction="#StartTracking2" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetPackageTypes">
+<soap:operation soapAction="#GetPackageTypes" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="CancelBooking">
+<soap:operation soapAction="#CancelBooking" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetCustomFieldDefinitions">
+<soap:operation soapAction="#GetCustomFieldDefinitions" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetItemFromVIN">
+<soap:operation soapAction="#GetItemFromVIN" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetShipmentStatus">
+<soap:operation soapAction="#SetShipmentStatus" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetMagayaDocument">
+<soap:operation soapAction="#GetMagayaDocument" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetAccountingTransactions">
+<soap:operation soapAction="#GetAccountingTransactions" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetRelatedTransactions">
+<soap:operation soapAction="#GetRelatedTransactions" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetAccountDefinitions">
+<soap:operation soapAction="#GetAccountDefinitions" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetChargeDefinitions">
+<soap:operation soapAction="#GetChargeDefinitions" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetActiveCurrencies">
+<soap:operation soapAction="#GetActiveCurrencies" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="QueryLog">
+<soap:operation soapAction="#QueryLog" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetPODData">
+<soap:operation soapAction="#GetPODData" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetClientRates">
+<soap:operation soapAction="#GetClientRates" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetStandardRates">
+<soap:operation soapAction="#GetStandardRates" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetClientChargeDefinitions">
+<soap:operation soapAction="#GetClientChargeDefinitions" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetRate">
+<soap:operation soapAction="#SetRate" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetEntity">
+<soap:operation soapAction="#SetEntity" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetEntities">
+<soap:operation soapAction="#GetEntities" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetEntityContacts">
+<soap:operation soapAction="#GetEntityContacts" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SubmitSalesOrder">
+<soap:operation soapAction="#SubmitSalesOrder" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SubmitCargoRelease">
+<soap:operation soapAction="#SubmitCargoRelease" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SubmitShipment">
+<soap:operation soapAction="#SubmitShipment" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetEventDefinitions">
+<soap:operation soapAction="#GetEventDefinitions" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetTransactionEvents">
+<soap:operation soapAction="#SetTransactionEvents" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="UpdateOrder">
+<soap:operation soapAction="#UpdateOrder" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetCustomFieldValue">
+<soap:operation soapAction="#SetCustomFieldValue" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetApprovalStatus">
+<soap:operation soapAction="#SetApprovalStatus" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetCarrierRates">
+<soap:operation soapAction="#GetCarrierRates" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetEntityTransactions">
+<soap:operation soapAction="#GetEntityTransactions" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="QueryLogJS">
+<soap:operation soapAction="#QueryLogJS" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="ExistsTransaction">
+<soap:operation soapAction="#ExistsTransaction" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetTransactionStatus">
+<soap:operation soapAction="#GetTransactionStatus" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetTrackingUser">
+<soap:operation soapAction="#SetTrackingUser" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetItemDefinitionsByCustomer">
+<soap:operation soapAction="#GetItemDefinitionsByCustomer" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetInventoryItemsByItemDefinition">
+<soap:operation soapAction="#GetInventoryItemsByItemDefinition" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetTransactionsByBillingClient">
+<soap:operation soapAction="#GetTransactionsByBillingClient" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetEntitiesOfType">
+<soap:operation soapAction="#GetEntitiesOfType" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetWebDocument">
+<soap:operation soapAction="#GetWebDocument" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetFirstTransbyDate">
+<soap:operation soapAction="#GetFirstTransbyDate" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetFirstTransbyDateJS">
+<soap:operation soapAction="#GetFirstTransbyDateJS" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetNextTransbyDate">
+<soap:operation soapAction="#GetNextTransbyDate" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetTransRangeByDateJS">
+<soap:operation soapAction="#GetTransRangeByDateJS" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetSecureTrackingTransaction">
+<soap:operation soapAction="#GetSecureTrackingTransaction" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="Invoke">
+<soap:operation soapAction="#Invoke" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="ValidateSalesOrder">
+<soap:operation soapAction="#ValidateSalesOrder" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="CancelSalesOrder">
+<soap:operation soapAction="#CancelSalesOrder" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetTransactionCharges">
+<soap:operation soapAction="#SetTransactionCharges" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="UpdatePOD">
+<soap:operation soapAction="#UpdatePOD" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="ApproveOrder">
+<soap:operation soapAction="#ApproveOrder" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SubmitPickupOrder">
+<soap:operation soapAction="#SubmitPickupOrder" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetAttachment">
+<soap:operation soapAction="#SetAttachment" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="GetAllAttachments">
+<soap:operation soapAction="#GetAllAttachments" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="SetParentEntity">
+<soap:operation soapAction="#SetParentEntity" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+</binding>
+<service name="CSSoapService">
+<port name="CSSoapServiceSoap" binding="s0:CSSoapServiceSoap">
+<soap:address location="http://rampsgy:3691/Invoke?Handler=CSSoapService"/>
+</port>
+</service>
+</definitions>

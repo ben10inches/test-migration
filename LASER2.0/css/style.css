@@ -1,0 +1,61 @@
+.ct-chart-ranking .ct-bar {
+    stroke-width: 25px;
+}
+
+.third-legend{
+    background-color: #2CA58D !important;
+}
+
+.forth-legend{
+    background-color: #31316A !important;
+}
+
+.ct-label.ct-vertical.ct-start{
+    padding-left: 20px;
+}
+
+.dates{
+    width:10%;
+		display:inline;
+
+}
+
+.dataTables_paginate {
+    float: left !important;
+  }
+
+.dataTables_info{
+    float: right !important;
+}
+
+
+.dt-control{
+    cursor: pointer;
+}
+
+.white-space{
+    white-space: normal !important;
+}
+
+.dt-buttons{
+    display:inline-block;
+}
+
+.bolder{
+    /* font-weight: 900; */
+}
+
+.bg-green-100{
+    background-color: 	#262B40!important;
+}
+
+.bg-green-200{
+    background-color: #0000ff!important;
+}
+.bg-green-300{
+    background-color: #8000ff!important;
+}
+
+.ct-bar-label{
+    fill:white;
+}
